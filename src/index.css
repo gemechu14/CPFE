@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+/* ── Brand tokens ─────────────────────────────────────────────
+   Primary: Coop blue (~80% of the UI's colour).
+   Accent:  Coop orange (highlights, active markers, key CTAs). */
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Built around the brand blue #00ADEF (primary-500). */
+  --color-primary-50: #e6f8fe;
+  --color-primary-100: #ccf1fd;
+  --color-primary-200: #99e3fb;
+  --color-primary-300: #5cd2f7;
+  --color-primary-400: #24c0f3;
+  --color-primary-500: #00adef;
+  --color-primary-600: #0090cc;
+  --color-primary-700: #0074a6;
+  --color-primary-800: #035e87;
+  --color-primary-900: #084e70;
+  --color-primary-950: #06334b;
+
+  --color-accent-50: #fff7ed;
+  --color-accent-100: #ffecd3;
+  --color-accent-200: #ffd5a5;
+  --color-accent-300: #ffb76d;
+  --color-accent-400: #fd9a3b;
+  --color-accent-500: #f7931e;
+  --color-accent-600: #e0700b;
+  --color-accent-700: #b9530c;
+  --color-accent-800: #934111;
+  --color-accent-900: #773711;
+
+  /* Fixed brand shades for surfaces that stay dark in both themes (banners,
+     overlays, gradients). Unlike primary-*, these never flip in dark mode. */
+  --color-brand-700: #0074a6;
+  --color-brand-800: #035e87;
+  --color-brand-900: #084e70;
+  --color-brand-950: #06334b;
+
+  /* Card / panel background. White in light mode, deep slate in dark. */
+  --color-surface: #ffffff;
+
+  --shadow-card: 0 1px 2px 0 rgb(6 51 75 / 0.05), 0 1px 3px 0 rgb(6 51 75 / 0.06);
+}
+
+/* `dark:` utilities follow the .dark class on <html> (set by ThemeProvider). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ── Dark theme ───────────────────────────────────────────────
+   Pages use light-theme classes (bg-slate-50, text-slate-900, bg-red-50…).
+   In dark mode the palette itself flips: neutrals invert, pale tints become
+   deep tints and dark text shades become light, so every page adapts. */
+.dark {
+  color-scheme: dark;
+  --color-surface: #111a2b;
+
+  --color-slate-50: #0a1220;
+  --color-slate-100: #18233a;
+  --color-slate-200: #243149;
+  --color-slate-300: #34435e;
+  --color-slate-400: #6f7f99;
+  --color-slate-500: #93a2b8;
+  --color-slate-600: #aab7c9;
+  --color-slate-700: #c8d2e0;
+  --color-slate-800: #dde4ee;
+  --color-slate-900: #eef2f7;
+  --color-slate-950: #f8fafc;
+
+  --color-primary-50: color-mix(in oklab, #00adef 12%, #111a2b);
+  --color-primary-100: color-mix(in oklab, #00adef 20%, #111a2b);
+  --color-primary-200: color-mix(in oklab, #00adef 34%, #111a2b);
+  --color-primary-700: #5cd2f7;
+  --color-primary-800: #99e3fb;
+  --color-primary-900: #ccf1fd;
+  --color-primary-950: #e6f8fe;
+
+  --color-accent-50: color-mix(in oklab, #f7931e 12%, #111a2b);
+  --color-accent-100: color-mix(in oklab, #f7931e 20%, #111a2b);
+  --color-accent-200: color-mix(in oklab, #f7931e 34%, #111a2b);
+  --color-accent-700: #ffb76d;
+  --color-accent-800: #ffd5a5;
+  --color-accent-900: #ffecd3;
+
+  --color-red-50: color-mix(in oklab, #ef4444 12%, #111a2b);
+  --color-red-100: color-mix(in oklab, #ef4444 20%, #111a2b);
+  --color-red-200: color-mix(in oklab, #ef4444 34%, #111a2b);
+  --color-red-700: #fca5a5;
+  --color-red-800: #fecaca;
+  --color-red-900: #fee2e2;
+
+  --color-emerald-50: color-mix(in oklab, #10b981 12%, #111a2b);
+  --color-emerald-100: color-mix(in oklab, #10b981 20%, #111a2b);
+  --color-emerald-200: color-mix(in oklab, #10b981 34%, #111a2b);
+  --color-emerald-700: #6ee7b7;
+  --color-emerald-800: #a7f3d0;
+  --color-emerald-900: #d1fae5;
+
+  --color-amber-50: color-mix(in oklab, #f59e0b 12%, #111a2b);
+  --color-amber-100: color-mix(in oklab, #f59e0b 20%, #111a2b);
+  --color-amber-200: color-mix(in oklab, #f59e0b 34%, #111a2b);
+  --color-amber-700: #fcd34d;
+  --color-amber-800: #fde68a;
+  --color-amber-900: #fef3c7;
+
+  --color-violet-50: color-mix(in oklab, #8b5cf6 12%, #111a2b);
+  --color-violet-200: color-mix(in oklab, #8b5cf6 34%, #111a2b);
+  --color-violet-800: #ddd6fe;
+
+  --color-teal-50: color-mix(in oklab, #14b8a6 12%, #111a2b);
+  --color-teal-200: color-mix(in oklab, #14b8a6 34%, #111a2b);
+  --color-teal-800: #99f6e4;
+
+  --color-rose-50: color-mix(in oklab, #f43f5e 12%, #111a2b);
+  --color-rose-200: color-mix(in oklab, #f43f5e 34%, #111a2b);
+  --color-rose-700: #fda4af;
+  --color-rose-800: #fecdd3;
+
+  --shadow-card: 0 1px 2px 0 rgb(0 0 0 / 0.3), 0 1px 3px 0 rgb(0 0 0 / 0.25);
+}
+
+/* Theme switches cross-fade instead of snapping. */
+.theme-transition, .theme-transition * {
+  transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease !important;
+}
+
+@layer base {
+  html { -webkit-font-smoothing: antialiased; }
+  body { @apply bg-slate-50 text-slate-800; }
+  ::selection { @apply bg-primary-200 text-primary-950; }
+  :focus-visible { outline: 2px solid var(--color-primary-500); outline-offset: 2px; }
+}
+
+/* Tabular numbers for money and counts */
+.num { font-variant-numeric: tabular-nums; }
+
+/* Thin scrollbars inside the app shell */
+.scroll-thin::-webkit-scrollbar { width: 8px; height: 8px; }
+.scroll-thin::-webkit-scrollbar-thumb { background: rgb(148 163 184 / 0.5); border-radius: 8px; }
+
+/* Scrollbar that stays invisible until you hover the area (sidebar). */
+.scroll-hover { scrollbar-width: thin; scrollbar-color: transparent transparent; scrollbar-gutter: stable; }
+.scroll-hover:hover { scrollbar-color: var(--color-slate-300) transparent; }
+
+/* ── Motion ───────────────────────────────────────────────────
+   Short and subtle: pages ease in, the save bar slides up, and loaders
+   wait a beat so quick loads never flash a spinner. */
+@theme {
+  --animate-page-in: page-in 180ms ease-out both;
+  --animate-slide-up: slide-up 200ms ease-out both;
+  --animate-fade-in-delayed: fade-in 200ms ease-out 250ms both;
+}
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(100%); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; animation-delay: 0ms !important; transition-duration: 1ms !important; }
+}
