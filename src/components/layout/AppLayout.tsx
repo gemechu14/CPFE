@@ -12,6 +12,7 @@ import {
   ClipboardList,
   CloudDownload,
   FileBarChart,
+  FlaskConical,
   HandCoins,
   KeyRound,
   LayoutDashboard,
@@ -123,6 +124,7 @@ export function AppLayout() {
 
   const canSetup = can(PERMS.viewSystem);
   const canApprove = can(PERMS.createPayrollApproval);
+  const canSimulate = can(PERMS.simulatePayroll);
 
   // Ordered the way a month's payroll flows: prepare → run → review → approve → pay → report.
   const groups: NavGroup[] = useMemo(
@@ -145,6 +147,7 @@ export function AppLayout() {
           { to: '/payroll/run', label: 'Run payroll', icon: PlayCircle },
           { to: '/payroll/month', label: 'This month', icon: ClipboardList },
           { to: '/payroll/adjustments', label: 'Arrears & recoveries', icon: ArrowLeftRight },
+          { to: '/payroll/simulation', label: 'Simulation', icon: FlaskConical, show: canSimulate },
           { to: '/payroll/approvals', label: 'Approvals', icon: BadgeCheck, show: canApprove },
         ],
       },
@@ -168,7 +171,7 @@ export function AppLayout() {
         items: [{ to: '/settings/company', label: 'Configuration', icon: Settings2, match: CONFIG_PATHS }],
       },
     ],
-    [isHrSync, canSetup, canApprove],
+    [isHrSync, canSetup, canApprove, canSimulate],
   );
   const visibleGroups = groups.map((g) => ({ ...g, items: g.items.filter((i) => i.show !== false) })).filter((g) => g.items.length);
 

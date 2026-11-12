@@ -15,6 +15,7 @@ export function Tabs<T extends string>({ items, value, onChange, className }: { 
         return (
           <button
             key={t.value}
+            type="button"
             role="tab"
             aria-selected={active}
             onClick={() => onChange(t.value)}
@@ -43,6 +44,7 @@ export function Segmented<T extends string>({ items, value, onChange }: { items:
       {items.map((i) => (
         <button
           key={i.value}
+          type="button"
           onClick={() => onChange(i.value)}
           className={cn(
             'rounded-md px-3 py-1.5 text-xs font-medium transition',

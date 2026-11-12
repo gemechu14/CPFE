@@ -45,6 +45,7 @@ const PaymentsPage = page(() => import('@/features/review/PaymentsPage').then((m
 const ApprovalsPage = page(() => import('@/features/approvals/ApprovalsPage').then((m) => ({ default: m.ApprovalsPage })));
 const WorkflowsPage = page(() => import('@/features/approvals/WorkflowsPage').then((m) => ({ default: m.WorkflowsPage })));
 const ReportsPage = page(() => import('@/features/reports/ReportsPage').then((m) => ({ default: m.ReportsPage })));
+const SimulationPage = page(() => import('@/features/simulation/SimulationPage').then((m) => ({ default: m.SimulationPage })));
 
 export function App() {
   const { isAuthenticated } = useAuth();
@@ -78,6 +79,7 @@ export function App() {
           <Route path="payments" element={<PaymentsPage />} />
           <Route path="payroll/payments" element={<Navigate to="/payments" replace />} />
           <Route path="payroll/additional-pay" element={<OneOffPayPage />} />
+          <Route path="payroll/simulation" element={<SimulationPage />} />
           <Route path="reports" element={<ReportsPage />} />
           <Route path="settings" element={<Navigate to="/settings/company" replace />} />
           <Route path="setup" element={<Navigate to="/settings/company" replace />} />

@@ -17,6 +17,8 @@ export const PERMS = {
   viewPayrollApproval: 'view_payroll_approval',
   createPayrollApproval: 'create_payroll_approval',
   readPayment: 'read_payment',
+  // Phase 10
+  simulatePayroll: 'simulate_payroll',
 } as const;
 
 interface AuthValue {
